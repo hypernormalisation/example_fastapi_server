@@ -100,7 +100,7 @@ With conda installed, a simple
 conda env create -f conda_env.yml
 ```
 
-will create an env called "example_fastapi_server":
+will create an env called `example_fastapi_server`:
 
 ```bash
 conda activate example_fastapi_server
@@ -124,6 +124,9 @@ uvicorn web_app.main:app
 
 To read your self-generating documentation, go to `127.0.0.0:8000/docs`
 in your web browser of choice.
+
+You can also directly interact with the API from this page, with all the
+expected POST data, param queries etc. accounted for!
 
 To download the OpenAPI json specification for your API, to
 automatically interface client applications or the like, just request

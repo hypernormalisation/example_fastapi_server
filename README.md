@@ -96,11 +96,15 @@ that the shared resource is in use.
 
 With conda installed, a simple
 
-`conda env create -f conda_env.yml`
+```bash
+conda env create -f conda_env.yml
+```
 
 will create an env called "example_fastapi_server":
 
-`conda activate example_fastapi_server`.
+```bash
+conda activate example_fastapi_server
+```
 
 If you would prefer not to use conda, create a virtualenv and run:
 

@@ -1,5 +1,4 @@
 import asyncio
-import time
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.logger import logger

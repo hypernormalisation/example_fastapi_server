@@ -77,6 +77,21 @@ documentation on your APIs.
 We include an example server, in `web_app/main.py`, and a conda env file
 `conda_env.yml`.
 
+There are two endpoints:
+
+- GET /public/test: a simple test to return a message
+- POST /merge: an endpoint to simulate the manipulation of some shared
+  resource
+
+If you POST to merge with the expected format (for that see Read the
+Docs!) then we simulate a shared resource being used for 10 seconds.
+
+If the shared resource is free, we return a simple message confirming
+the merge is in process.
+
+If the shared resource is not free, we return a 401 code with the detail
+that the shared resource is in use.
+
 ### Environment
 
 With conda installed, a simple

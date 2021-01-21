@@ -72,6 +72,10 @@ FastAPI is built on the OenAPI standard for documentation, and uses
 Python 3.8+'s own built-in type checking to validate data and populate
 documentation on your APIs.
 
+It also has some of the best docs in the business:
+
+https://fastapi.tiangolo.com/
+
 ## Example Server
 
 We include an example server, in `web_app/main.py`, and a conda env file

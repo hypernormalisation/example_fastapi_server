@@ -24,24 +24,27 @@ class Merge(BaseModel):
 # And now handle the shared resource with a context manager and a global var.
 _shared_resource_lock = False
 
+_shared_resources_dict = {}
+
 
 class SharedResource:
-    def __init__(self):
-        global _shared_resource_lock
-        _shared_resource_lock = True
+    def __init__(self, branch_name):
+        self.branch_name = branch_name
+        global _shared_resources_dict
+        _shared_resources_dict[self.branch_name] = True
 
     def __enter__(self):
         pass
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        global _shared_resource_lock
-        _shared_resource_lock = False
+        global _shared_resources_dict
+        _shared_resources_dict[self.branch_name] = False
 
 
 async def use_shared_resource(branch_name: str):
     """A function to simulate a shared resource being run, in this case our
     merge request."""
-    with SharedResource():
+    with SharedResource(branch_name):
         logger.info(f'merging branch: {branch_name}')
         await asyncio.sleep(10)
 
@@ -62,10 +65,10 @@ async def merge_branches(merge: Merge, background_tasks: BackgroundTasks):
     Simple endpoint to simulate a shared resource we want to merge that must
     be locked when active. We simulate for 10 seconds.
     """
-    global _shared_resource_lock
-    if _shared_resource_lock:
+    global _shared_resources_dict
+    if _shared_resources_dict.get(merge.branch_name):
         logger.warning("We got a request but the shared resource is in use!")
-        raise HTTPException(status_code=400, detail="Shared resource in use!")
+        raise HTTPException(status_code=400, detail=f"Branch {merge.branch_name} already in use!")
 
     background_tasks.add_task(use_shared_resource, merge.branch_name)
-    return {'message': 'merge in progress'}
+    return {'message': f'merge for branch: {merge.branch_name} in progress'}

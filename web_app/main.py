@@ -1,3 +1,4 @@
+import asyncio
 import time
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks
@@ -20,6 +21,7 @@ class Merge(BaseModel):
     """
     branch_name: str
 
+
 # And now handle the shared resource with a context manager and a global var.
 _shared_resource_lock = False
 
@@ -37,12 +39,12 @@ class SharedResource:
         _shared_resource_lock = False
 
 
-def use_shared_resource(branch_name: str):
+async def use_shared_resource(branch_name: str):
     """A function to simulate a shared resource being run, in this case our
     merge request."""
     with SharedResource():
         logger.info(f'merging branch: {branch_name}')
-        time.sleep(10)
+        await asyncio.sleep(10)
 
 
 # We now declare the FastAPI app.

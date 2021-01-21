@@ -22,8 +22,6 @@ class Merge(BaseModel):
 
 
 # And now handle the shared resource with a context manager and a global var.
-_shared_resource_lock = False
-
 _shared_resources_dict = {}
 
 
@@ -68,7 +66,8 @@ async def merge_branches(merge: Merge, background_tasks: BackgroundTasks):
     global _shared_resources_dict
     if _shared_resources_dict.get(merge.branch_name):
         logger.warning("We got a request but the shared resource is in use!")
-        raise HTTPException(status_code=400, detail=f"Branch {merge.branch_name} already in use!")
+        raise HTTPException(status_code=400,
+                            detail=f"Branch {merge.branch_name} already in use!")
 
     background_tasks.add_task(use_shared_resource, merge.branch_name)
     return {'message': f'merge for branch: {merge.branch_name} in progress'}

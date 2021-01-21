@@ -81,16 +81,17 @@ There are two endpoints:
 
 - GET /public/test: a simple test to return a message
 - POST /merge: an endpoint to simulate the manipulation of some shared
-  resource
+  resource. Takes a branch_name in the request body.
 
 If you POST to merge with the expected format (for that see Read the
-Docs!) then we simulate a shared resource being used for 10 seconds.
+Docs!) then we simulate a set of shared resources being used for 10
+seconds.
 
-If the shared resource is free, we return a simple message confirming
-the merge is in process.
+If the shared resource for branch_name is free, we return a simple
+message confirming the merge is in process.
 
-If the shared resource is not free, we return a 401 code with the detail
-that the shared resource is in use.
+If the shared resource for branch_name is not free, we return a 401 code
+with the detail that the shared resource is in use.
 
 ### Environment
 

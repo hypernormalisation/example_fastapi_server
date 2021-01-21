@@ -122,8 +122,8 @@ uvicorn web_app.main:app
 
 ### Read the docs
 
-To read your self-generating documentation, go to `127.0.0.0:8000/docs`
-in your web browser of choice.
+To read your self-generating documentation, go to
+`http://127.0.0.1:8000/docs` in your web browser of choice.
 
 You can also directly interact with the API from this page, with all the
 expected POST data, param queries etc. accounted for!

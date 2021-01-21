@@ -5,7 +5,7 @@ from fastapi.logger import logger
 from pydantic import BaseModel
 
 
-# FastAPI used Pydantic schemas to tell your web application how request data,
+# FastAPI uses Pydantic schemas to tell your web application how request data,
 # including body and headers, should look.
 # You can also directly use params in the endpoint functions that will be
 # interpreted as query params.
